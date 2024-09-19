@@ -1,0 +1,15 @@
+.ops-container {
+    width: 500px;
+    left: 80px;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    height: 100vh;
+    background: #252836;
+    color: #fff;
+    z-index: 100;
+}
+.maps-container {
+    z-index: 1;
+}
+

@@ -1,0 +1,40 @@
+<div class="map-layout">
+  <div class="canvas-box p-4">
+    <app-fleets (locationsChanged)="onLocationsChanged($event)"></app-fleets>
+    <hr style="background: white;">
+    <div class="text-light">
+      <app-locations></app-locations>
+    </div>
+  </div>
+  <google-map
+    height="100vh"
+    width="100vw"
+    [center]="center"
+    [zoom]="zoom"
+    (mapClick)="moveMap($event)"
+    (mapMousemove)="move($event)"
+    [options]="options"
+  >
+    <map-marker
+      *ngFor="let fleet of fleets"
+      [position]="{ lat: fleet.lat, lng: fleet.lng }"
+      [icon]="getIcon(fleet.status, fleet.rotation)"
+      (mapClick)="openInfoWindow(fleet)"
+    ></map-marker>
+
+    <map-info-window
+      *ngIf="selectedFleet"
+      [position]="{ lat: selectedFleet.lat, lng: selectedFleet.lng }"
+    >
+      <div>
+        <h3>{{ selectedFleet.status }} 2024</h3>
+        <p>{{ selectedFleet.details }}</p>
+        <!-- Add more details as needed -->
+      </div>
+    </map-info-window>
+
+    <map-circle [center]="circleCenter" [options]="circleOptions"> </map-circle>
+  </google-map>
+
+  
+</div>

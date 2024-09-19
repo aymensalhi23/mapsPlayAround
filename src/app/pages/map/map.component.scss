@@ -1,0 +1,9 @@
+.canvas-box {
+    left: 80px;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    width: 400px;
+    background: var(--input-bg);
+    z-index: 10;
+}

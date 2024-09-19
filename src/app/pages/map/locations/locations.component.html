@@ -1,0 +1,23 @@
+<div class="search-container">
+  <span class="p-input-icon-left search-input col-12">
+    <i class="pi pi-search"></i>
+    <input
+      type="text"
+      #LocationInputField
+      pInputText
+      placeholder="Search Location"
+      (focus)="showSuggestions = true"
+    />
+  </span>
+  <ul
+    *ngIf="showSuggestions && suggestions.length > 0"
+    class="suggestions-list"
+  >
+    <li
+      *ngFor="let suggestion of suggestions"
+      (click)="selectSuggestion(suggestion)"
+    >
+      {{ suggestion.description }}
+    </li>
+  </ul>
+</div>

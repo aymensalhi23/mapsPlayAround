@@ -1,0 +1,240 @@
+<!--<div
+  class="sidebar-container"
+  [ngClass]="{
+    'sidebar-container-sm': sidebarsize === 0,
+    'sidebar-container-md': sidebarsize === 1,
+    'sidebar-container-lg': sidebarsize === 2
+  }"
+>
+  <div>
+    <div class="logo-box mb-4" *ngIf="sidebarsize === 1">
+      <img src="assets/svg/logo-sm.svg" alt="" />
+    </div>
+    <div class="logo-box mb-4" *ngIf="sidebarsize === 2">
+      <img src="assets/svg/logo-lg.svg" alt="" />
+    </div>
+    <button class="toggle-btn" (click)="changeSidebarSize()">
+      <img
+        src="assets/icons/toggle.svg"
+        alt=""
+        style="margin-bottom: 4px; width: 20px"
+      />
+    </button>
+  </div>
+
+  <div class="text-light" *ngIf="sidebarsize === 1">
+    <div *ngFor="let item of menu; let index = index">
+      <a
+        routerLink="/{{ item.link }}"
+        class="sidebar-link"
+        routerLinkActive="active-link"
+        *ngIf="!item.accordion"
+      >
+        <div class="icon-box">
+          <img src="assets/icons/{{ item.icon }}" alt="" />
+        </div>
+        <p>{{ item.label }}</p>
+      </a>
+
+      <div
+        class="dropend"
+        style="z-index: 10000000 !important"
+        *ngIf="item.accordion"
+      >
+        <a class="sidebar-link" data-bs-toggle="dropdown" aria-expanded="false">
+          <div class="icon-box">
+            <img src="assets/icons/{{ item.icon }}" alt="" />
+          </div>
+          <p class="dropdown-label">{{ item.label }}</p>
+        </a>
+        <div class="dropdown-menu">
+          <div class="dropdown-menu-header">
+            <p>{{ item.label }}</p>
+            <i class="bi bi-arrow-right-short"></i>
+          </div>
+          <div class="dropdown-menu-body">
+            <div *ngFor="let subItem of item.items">
+              <a
+                class="subitem-link"
+                routerLink="/{{ subItem.link }}"
+                routerLinkActive="active-link"
+                *ngIf="!subItem.accordion"
+              >
+                <div class="sub-icon-box">
+                  <img src="assets/icons/{{ subItem.icon }}" alt="" />
+                </div>
+                <p>{{ subItem.label }}</p>
+              </a>
+              <div *ngIf="subItem.accordion">
+                <a
+                  class="subitem-link"
+                  routerLink="/{{ subItem.link }}"
+                  routerLinkActive="active-link"
+                >
+                  <div class="sub-icon-box">
+                    <img src="assets/icons/{{ subItem.icon }}" alt="" />
+                  </div>
+                  <p>{{ subItem.label }}</p>
+                </a>
+                <div class="ms-4" *ngFor="let subsubItem of subItem.items">
+                  <a
+                    class="subitem-link"
+                    routerLink="/{{ subsubItem.link }}"
+                    routerLinkActive="active-link"
+                  >
+                    <div class="sub-icon-box">
+                      <img src="assets/icons/{{ subsubItem.icon }}" alt="" />
+                    </div>
+                    <p>{{ subsubItem.label }}</p>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-lg" *ngIf="sidebarsize === 2">
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+      <div *ngFor="let item of menu; let index = index">
+        <a
+          class="accordion-button d-flex single-accordion-button"
+          routerLinkActive="active-link"
+          routerLink="/{{ item.link }}"
+          *ngIf="!item.accordion"
+          type="button"
+        >
+          <div class="icon-box">
+            <img src="assets/icons/{{ item.icon }}" alt="" />
+          </div>
+          <p>{{ item.label }}</p>
+        </a>
+
+        <div class="accordion-item" *ngIf="item.accordion">
+          <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+            <a
+              class="accordion-button d-flex collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              href="#panel{{ index }}"
+              aria-expanded="false"
+            >
+              <div class="icon-box">
+                <img src="assets/icons/{{ item.icon }}" alt="" />
+              </div>
+              <p>{{ item.label }}</p>
+            </a>
+          </h2>
+          <div
+            id="panel{{ index }}"
+            class="accordion-collapse collapse"
+            aria-labelledby="panelsStayOpen-headingTwo"
+          >
+            <div class="accordion-body">
+              <div *ngFor="let subItem of item.items">
+                <a
+                  class="accordion-button d-flex single-accordion-button"
+                  *ngIf="!subItem.accordion"
+                  type="button"
+                  routerLinkActive="active-link"
+                  routerLink="/{{ subItem.link }}"
+                >
+                  <div class="icon-box">
+                    <img src="assets/icons/{{ subItem.icon }}" alt="" />
+                  </div>
+                  <p>{{ subItem.label }}</p>
+                </a>
+                <div *ngIf="subItem.accordion">
+                  <a
+                    class="accordion-button d-flex single-accordion-button"
+                    type="button"
+                  >
+                    <div class="icon-box">
+                      <img src="assets/icons/{{ subItem.icon }}" alt="" />
+                    </div>
+                    <p>{{ subItem.label }}</p>
+                  </a>
+
+                  <div *ngFor="let subsubitem of subItem.items" class="ps-4">
+                    <a
+                      class="accordion-button d-flex single-accordion-button"
+                      type="button"
+                      routerLinkActive="active-link"
+                      routerLink="/{{ subsubitem.link }}"
+                    >
+                      <div class="icon-box">
+                        <img src="assets/icons/{{ subsubitem.icon }}" alt="" />
+                      </div>
+                      <p>{{ subsubitem.label }}</p>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="text-light"
+    *ngIf="sidebarsize !== 0"
+    [ngClass]="{ 'large-sidebar-links': sidebarsize === 2 }"
+  >
+    <a
+      routerLink="/notifications"
+      class="sidebar-setting-link"
+      routerLinkActive="active-link"
+    >
+      <div class="icon-box">
+        <img src="assets/icons/bell.svg" alt="" />
+      </div>
+    </a>
+    <a
+      routerLink="/tools"
+      class="sidebar-setting-link"
+      routerLinkActive="active-link"
+    >
+      <div class="icon-box">
+        <img src="assets/icons/tools.svg" alt="" />
+      </div>
+    </a>
+    <a
+      routerLink="/calendar"
+      class="sidebar-setting-link"
+      routerLinkActive="active-link"
+    >
+      <div class="icon-box">
+        <img src="assets/icons/calendar.svg" alt="" />
+      </div>
+    </a>
+    <a
+      routerLink="/profile"
+      class="sidebar-profile-link"
+      routerLinkActive="active-link"
+    >
+      <div class="icon-box">
+        <div class="profile-img-box">
+          <img src="assets/avatar.svg" alt="" />
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+-->
+
+<div
+  class="sidebar-container sidebar-container-md"
+>
+  <div>
+    <div class="logo-box mb-4" *ngIf="sidebarsize === 1">
+      <img src="assets/svg/logo-sm.svg" alt="" />
+    </div>
+    <button class="toggle-btn" routerLink="/maps">
+      <--
+    </button>
+  </div>
+</div>

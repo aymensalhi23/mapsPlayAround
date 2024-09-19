@@ -1,0 +1,27 @@
+<div class="d-flex">
+  <div class="ops-container p-3">
+    <button class="btn btn-primary" (click)="drawMarkers()">
+        Draw Markers
+      </button>
+
+      <button class="btn btn-primary" (click)="drawRoute()">
+        Draw Route
+      </button>
+  </div>
+  <div class="maps-container">
+    <div #map id="mainmap" style="width: 100vw; height: 100vh;"></div>
+    <!--<google-map
+      #map
+      height="100vh"
+      width="100vw"
+      [center]="center"
+      [zoom]="zoom"
+      [options]="options"
+      id="mainmap"
+    >
+      <map-marker *ngIf="origin" [position]="origin"></map-marker>
+
+      <map-marker *ngIf="destination" [position]="destination"></map-marker>
+    </google-map>-->
+  </div>
+</div>

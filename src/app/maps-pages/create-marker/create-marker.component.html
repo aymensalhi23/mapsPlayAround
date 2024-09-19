@@ -1,0 +1,97 @@
+<div class="d-flex">
+  <div class="ops-container">
+    <div class="search-container">
+      <span class="p-input-icon-left search-input col-12">
+        <i class="pi pi-search"></i>
+        <input
+          type="text"
+          #LocationInputField
+          pInputText
+          placeholder="Search Location"
+        />
+      </span>
+    </div>
+
+    <div class="p-3">
+        <button class="btn btn-block btn-primary" (click)="addDraggableMarker()">Add Draggable Marker</button>
+    </div>
+
+    <div class="p-3">
+        <button class="btn btn-success mx-1" (click)="addCustomerMarker('active')">Active</button>
+        <button class="btn btn-warning mx-1" (click)="addCustomerMarker('idle')">Idle</button>
+        <button class="btn btn-danger mx-1" (click)="addCustomerMarker('stopped')">Stopped</button>
+    </div>
+  </div>
+  <div class="maps-container">
+    <google-map
+      #GoogleMap
+      height="100vh"
+      width="100vw"
+      [center]="center"
+      [zoom]="zoom"
+      (mapClick)="addMarkerByClick($event)"
+      [options]="options"
+      id="mainmap"
+    >
+      <map-marker
+        *ngFor="let marker of markers"
+        [icon]="carIcon()"
+        [position]="marker.position"
+        [options]="{ draggable: true }"
+        (mapClick)="openInfoWindow(marker)"
+        (mapDragend)="move($event, marker)"
+      ></map-marker>
+
+      <map-marker
+        *ngIf="markerPosition"
+        [position]="markerPosition.position"
+        [icon]="carIcon()"
+        [options]="{ draggable: true }"
+        (mapClick)="openInfoWindow(markerPosition)"
+        (mapDragend)="move($event, markerPosition)"
+      ></map-marker>
+
+      <map-marker
+        *ngFor="let marker of customMarkers"
+        [position]="marker.position"
+        [icon]="getIcon(marker.status)"
+        [options]="{ draggable: true }"
+        (mapDragend)="move($event, marker)"
+        (mapClick)="openInfoWindow(marker)"
+      ></map-marker>
+
+      <map-info-window
+      *ngIf="selectedFleet && zoom >= 8"
+      [position]="{ lat: selectedFleet.position.lat, lng: selectedFleet.position.lng }"
+    >
+      <div class="d-flex">
+        <div class="vehicle-img">
+          <img src="assets/icons/busimg.svg" alt="" />
+        </div>
+        <div class="sensors-cards p-3">
+          <div>
+            <div class="small-card" style="border-color: #cecbde">
+              <img src="assets/icons/single-lamp.svg" alt="" />
+            </div>
+          </div>
+          <div class="d-flex small-cards-group">
+            <div class="small-card">AC</div>
+            <div class="small-card">
+              <i class="bi bi-fuel-pump text-danger"></i>
+            </div>
+            <div class="small-card text-danger">
+              <i class="bi bi-thermometer-half"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="vehicle-details px-2 pt-2">
+        <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae magni laboriosam corporis modi perspiciatis saepe reiciendis iusto. Non vero dolor, neque eaque iste, ipsum accusamus tenetur mollitia, architecto nemo ea?
+        </p>
+      </div>
+    </map-info-window>
+
+    </google-map>
+  </div>
+</div>

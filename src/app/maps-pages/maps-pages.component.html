@@ -1,0 +1,7 @@
+<div class="main-container">
+    <div class="cards-container">
+        <div class="card shadow-sm" *ngFor="let card of cards" routerLink="/maps/{{card.link}}">
+            <h4>{{card.label}}</h4>
+        </div>
+    </div>
+</div>

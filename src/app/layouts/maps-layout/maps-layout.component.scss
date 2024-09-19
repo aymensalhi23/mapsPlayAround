@@ -1,0 +1,11 @@
+.sidebar-container {
+    z-index: 10000;
+    overflow-x: visible;
+}
+.maps-container {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+}

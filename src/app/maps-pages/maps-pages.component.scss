@@ -1,0 +1,32 @@
+.main-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+    justify-content: center;
+
+    .cards-container {
+        width: 100%;
+        max-width: 1199px;
+        height: 80vh;
+        border-radius: 15px;
+        overflow-y: auto;
+        padding: 15px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
+        gap: 24px; /* Adjust the gap between cards as needed */
+        padding: 16px;
+
+        .card {
+            border-radius: 15px;
+            text-align: center;
+            justify-content: center;
+            border-color: #f7f8ff;
+            cursor: pointer;
+            &:hover {
+                background: #f7f8ff;
+            }
+        }
+    }
+}

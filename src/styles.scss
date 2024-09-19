@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+@import url(scss/colors.scss);
+@import url(scss/primeng-components.scss);
+@import url(scss/common-component.scss);
+
+
+
+
+.pac-container {
+    background: transparent;
+    display: block !important;
+    .pac-item {
+        border: none;
+        height: 64px;
+        display: flex;
+        vertical-align: middle;
+        align-items: center;
+        line-height: 64px;
+        background: var(--link-bg);
+        transition: .8s;
+        margin: 10px 5px;
+        border-radius: 15px;
+        cursor: pointer;
+        color: var(--text-100);
+        &:hover {
+            background: var(--link-bg-2) !important;
+        }
+        /*span {
+            background: orange;
+        }
+        .pac-icon-marker {
+            background: yellow;
+        }*/
+        .pac-item-query {
+            color: var(--text-100) !important;
+        }
+    }
+}

@@ -1,0 +1,9 @@
+label {
+    color: var(--input-label);
+}
+
+.submit-button {
+    .p-button-label {
+        font-weight: 400 !important;
+    }
+}

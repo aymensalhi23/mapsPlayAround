@@ -1,0 +1,14 @@
+<div class="form-check" *ngFor="let fleet of fleets">
+    <input
+      [checked]="selectedFleets.includes(fleet)"
+      (change)="onCheckboxChange(fleet, $event)"
+      class="form-check-input pointer"
+      type="checkbox"
+      value=""
+      id="{{ fleet.id }}"
+    />
+    <label class="form-check-label pointer" for="{{ fleet.id }}">
+      {{ fleet.status }}
+    </label>
+  </div>
+  
